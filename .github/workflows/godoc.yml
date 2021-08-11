@@ -1,0 +1,28 @@
+name: GoDoc
+
+on:
+  create
+
+jobs:
+  GoSumDB:
+    name: Trigger GoSum/PkgGoDev
+    runs-on: ubuntu-latest
+
+    env:
+      GO_SUM: https://sum.golang.org/lookup
+      GO_PKG: https://pkg.go.dev/fetch
+
+    steps:
+      - name: Send request to GoSum DB
+        if: ${{ github.ref == refs/tags/* }}
+        run: |
+          full_ver=$(echo ${GITHUB_REF} | cut -f3 -d'/')
+          major_ver=$(echo ${full_ver} | cut -f1 -d'.')
+          curl -s -m 15 ${{env.GO_SUM}}/pkg.re/${{github.repository}}.${major_ver}@${full_ver}+incompatible
+
+      - name: Send request to PkgGoDev
+        if: ${{ github.ref == refs/tags/* }}
+        run: |
+          full_ver=$(echo ${GITHUB_REF} | cut -f3 -d'/')
+          major_ver=$(echo ${full_ver} | cut -f1 -d'.')
+          curl -s -m 5 -X POST ${{env.GO_PKG}}/pkg.re/${{github.repository}}.${major_ver}@${full_ver}+incompatible || exit 0
