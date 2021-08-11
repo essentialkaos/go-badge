@@ -38,7 +38,7 @@ jobs:
 
       - name: Download dependencies
         working-directory: ${{env.SRC_DIR}}
-        run: make deps-test
+        run: make deps deps-test
 
       - name: Download Verdana font
         working-directory: ${{env.SRC_DIR}}
