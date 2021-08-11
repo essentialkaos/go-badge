@@ -14,15 +14,17 @@ jobs:
 
     steps:
       - name: Send request to GoSum DB
-        if: ${{ github.ref == refs/tags/* }}
         run: |
-          full_ver=$(echo ${GITHUB_REF} | cut -f3 -d'/')
-          major_ver=$(echo ${full_ver} | cut -f1 -d'.')
-          curl -s -m 15 ${{env.GO_SUM}}/pkg.re/${{github.repository}}.${major_ver}@${full_ver}+incompatible
+          if [[ $GITHUB_REF == refs/tags/* ]] ; then
+            full_ver=$(echo ${GITHUB_REF} | cut -f3 -d'/')
+            major_ver=$(echo ${full_ver} | cut -f1 -d'.')
+            curl -s -m 15 ${{env.GO_SUM}}/pkg.re/${{github.repository}}.${major_ver}@${full_ver}+incompatible
+          fi
 
       - name: Send request to PkgGoDev
-        if: ${{ github.ref == refs/tags/* }}
         run: |
-          full_ver=$(echo ${GITHUB_REF} | cut -f3 -d'/')
-          major_ver=$(echo ${full_ver} | cut -f1 -d'.')
-          curl -s -m 5 -X POST ${{env.GO_PKG}}/pkg.re/${{github.repository}}.${major_ver}@${full_ver}+incompatible || exit 0
+          if [[ $GITHUB_REF == refs/tags/* ]] ; then
+            full_ver=$(echo ${GITHUB_REF} | cut -f3 -d'/')
+            major_ver=$(echo ${full_ver} | cut -f1 -d'.')
+            curl -s -m 5 -X POST ${{env.GO_PKG}}/pkg.re/${{github.repository}}.${major_ver}@${full_ver}+incompatible || exit 0
+          fi
