@@ -3,13 +3,14 @@
 <p align="center">
   <a href="https://kaos.sh/g/go-badge.v1"><img src="https://gh.kaos.st/godoc.svg" alt="PkgGoDev" /></a>
   <a href="https://kaos.sh/w/go-badge/ci"><img src="https://kaos.sh/w/go-badge/ci.svg" alt="GitHub Actions CI Status" /></a>
+  <a href="https://kaos.sh/r/go-badge"><img src="https://kaos.sh/r/go-badge.svg" alt="GoReportCard" /></a>
   <a href="https://kaos.sh/c/go-badge"><img src="https://kaos.sh/c/go-badge.svg" alt="Coverage Status" /></a>
   <a href="https://kaos.sh/b/go-badge"><img src="https://kaos.sh/b/0cbded00-9dfb-458b-bdf8-27b2c70ede9b.svg" alt="Codebeat badge" /></a>
   <a href="https://kaos.sh/w/go-badge/codeql"><img src="https://kaos.sh/w/go-badge/codeql.svg" alt="GitHub Actions CodeQL Status" /></a>
   <a href="#license"><img src="https://gh.kaos.st/apache2.svg"></a>
 </p>
 
-<p align="center"><a href="#installation">Installation</a> • <a href="#usage-example">Usage example</a> • <a href="#build-status">Build Status</a> • <a href="#contributing">Contributing</a> • <a href="#license">License</a></p>
+<p align="center"><a href="#installation">Installation</a> • <a href="#usage-example">Usage example</a> • <a href="#build-status">Build Status</a> • <a href="#contributing">Contributing</a> • <a href="#thanks">Thanks</a> • <a href="#license">License</a></p>
 
 <br/>
 
@@ -44,13 +45,13 @@ import (
 // ////////////////////////////////////////////////////////////////////////// //
 
 func main() {
-  g, err := badge.NewGenerator("Verdana.ttf")
+  g, err := badge.NewGenerator("Verdana.ttf", 11)
 
   if err != nil {
     panic(err)
   }
 
-  fmt.Println(g.GeneratePlastic("status", "ok", "#97ca00"))
+  fmt.Println(string(g.GeneratePlastic("status", "ok", "#97ca00")))
 }
 ```
 
@@ -64,6 +65,14 @@ func main() {
 ### Contributing
 
 Before contributing to this project please read our [Contributing Guidelines](https://github.com/essentialkaos/contributing-guidelines#contributing-guidelines).
+
+### Thanks
+
+We would like to thank:
+
+* All authors and [contributors](https://github.com/badges/shields/graphs/contributors) of [shields.io](https://shields.io) service;
+* All authors of [`freetype`](https://github.com/golang/freetype/blob/master/AUTHORS) package;
+* [@narqo](https://github.com/narqo) for [`go-badge`](https://github.com/narqo/go-badge) package.
 
 ### License
 

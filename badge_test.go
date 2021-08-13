@@ -30,7 +30,7 @@ var _ = Suite(&BadgeSuite{})
 func (s *BadgeSuite) SetUpTest(c *C) {
 	var err error
 
-	s.generator, err = NewGenerator("Verdana.ttf")
+	s.generator, err = NewGenerator("Verdana.ttf", 11)
 
 	if err != nil {
 		c.Fatal(err.Error())
@@ -38,11 +38,11 @@ func (s *BadgeSuite) SetUpTest(c *C) {
 }
 
 func (s *BadgeSuite) TestErrors(c *C) {
-	_, err := NewGenerator("unknown.ttf")
+	_, err := NewGenerator("unknown.ttf", 0)
 
 	c.Assert(err, NotNil)
 
-	_, err = NewGenerator("badge.go")
+	_, err = NewGenerator("badge.go", 0)
 
 	c.Assert(err, NotNil)
 }
@@ -56,7 +56,7 @@ func (s *BadgeSuite) TestPlastic(c *C) {
 
 	ourBadge := s.generator.GeneratePlastic("test1", "good", "ff69b4")
 
-	c.Assert(ourBadge, Equals, string(srcBadge))
+	c.Assert(ourBadge, DeepEquals, srcBadge)
 }
 
 func (s *BadgeSuite) TestFlat(c *C) {
@@ -68,7 +68,7 @@ func (s *BadgeSuite) TestFlat(c *C) {
 
 	ourBadge := s.generator.GenerateFlat("test1", "good", "ff69b4")
 
-	c.Assert(ourBadge, Equals, string(srcBadge))
+	c.Assert(ourBadge, DeepEquals, srcBadge)
 }
 
 func (s *BadgeSuite) TestFlatSquare(c *C) {
@@ -80,5 +80,5 @@ func (s *BadgeSuite) TestFlatSquare(c *C) {
 
 	ourBadge := s.generator.GenerateFlatSquare("test1", "good", "ff69b4")
 
-	c.Assert(ourBadge, Equals, string(srcBadge))
+	c.Assert(ourBadge, DeepEquals, srcBadge)
 }
