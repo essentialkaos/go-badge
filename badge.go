@@ -39,8 +39,8 @@ const (
 )
 
 const (
-	DEFAULT_OFFSET  = 9
-	DEFAULT_SPACING = 0
+	DEFAULT_OFFSET  = 9 // default font offset
+	DEFAULT_SPACING = 0 // default letter spacing
 )
 
 // ////////////////////////////////////////////////////////////////////////////////// //
@@ -53,9 +53,10 @@ const _TEMPLATE_FLAT_SQUARE = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xli
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
+// Generator is badge generator
 type Generator struct {
 	Offset  int     // Text offset
-	Spacing float64 // Text spacing
+	Spacing float64 // Letter spacing
 
 	fontSize int
 	fontName string
@@ -64,6 +65,7 @@ type Generator struct {
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
+// NewGenerator creates new badge generator with given font
 func NewGenerator(fontFile string, fontSize int) (*Generator, error) {
 	fontData, err := ioutil.ReadFile(fontFile)
 
