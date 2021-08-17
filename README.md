@@ -10,7 +10,7 @@
   <a href="#license"><img src="https://gh.kaos.st/apache2.svg"></a>
 </p>
 
-<p align="center"><a href="#installation">Installation</a> • <a href="#usage-example">Usage example</a> • <a href="#build-status">Build Status</a> • <a href="#contributing">Contributing</a> • <a href="#thanks">Thanks</a> • <a href="#license">License</a></p>
+<p align="center"><a href="#installation">Installation</a> • <a href="#usage-example">Usage example</a> • <a href="#examples">Examples</a> • <a href="#build-status">Build Status</a> • <a href="#contributing">Contributing</a> • <a href="#thanks">Thanks</a> • <a href="#license">License</a></p>
 
 <br/>
 
@@ -54,6 +54,25 @@ func main() {
   fmt.Println(string(g.GeneratePlastic("status", "ok", "#97ca00")))
 }
 ```
+
+### Examples
+
+| Flat | Flat Square | Plastic |
+|------|-------------|---------|
+| [flat](.github/images/flat_brightgreen.svg) | [square](.github/images/square_brightgreen.svg) | [plastic](.github/images/plastic_brightgreen.svg) |
+| [flat](.github/images/flat_green.svg) | [square](.github/images/square_green.svg) | [plastic](.github/images/plastic_green.svg) |
+| [flat](.github/images/flat_yellowgreen.svg) | [square](.github/images/square_yellowgreen.svg) | [plastic](.github/images/plastic_yellowgreen.svg) |
+| [flat](.github/images/flat_yellow.svg) | [square](.github/images/square_yellow.svg) | [plastic](.github/images/plastic_yellow.svg) |
+| [flat](.github/images/flat_orange.svg) | [square](.github/images/square_orange.svg) | [plastic](.github/images/plastic_orange.svg) |
+| [flat](.github/images/flat_red.svg) | [square](.github/images/square_red.svg) | [plastic](.github/images/plastic_red.svg) |
+| [flat](.github/images/flat_blue.svg) | [square](.github/images/square_blue.svg) | [plastic](.github/images/plastic_blue.svg) |
+| [flat](.github/images/flat_lightgrey.svg) | [square](.github/images/square_lightgrey.svg) | [plastic](.github/images/plastic_lightgrey.svg) |
+| [flat](.github/images/flat_success.svg) | [square](.github/images/square_success.svg) | [plastic](.github/images/plastic_success.svg) |
+| [flat](.github/images/flat_important.svg) | [square](.github/images/square_important.svg) | [plastic](.github/images/plastic_important.svg) |
+| [flat](.github/images/flat_critical.svg) | [square](.github/images/square_critical.svg) | [plastic](.github/images/plastic_critical.svg) |
+| [flat](.github/images/flat_informational.svg) | [square](.github/images/square_informational.svg) | [plastic](.github/images/plastic_informational.svg) |
+| [flat](.github/images/flat_inactive.svg) | [square](.github/images/square_inactive.svg) | [plastic](.github/images/plastic_inactive.svg) |
+| [flat](.github/images/flat_custom.svg) | [square](.github/images/square_custom.svg) | [plastic](.github/images/plastic_custom.svg) |
 
 ### Build Status
 
