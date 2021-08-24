@@ -245,13 +245,13 @@ func getMessageColors(badgeColor string) (string, string) {
 }
 
 // parseColor parses hex color
-func parseColor(c string) int {
-	i, _ := strconv.ParseInt(c, 16, 64)
-	return int(i)
+func parseColor(c string) int64 {
+	i, _ := strconv.ParseInt(c, 16, 32)
+	return i
 }
 
 // calcLuminance calculates relative luminance
-func calcLuminance(color int) float64 {
+func calcLuminance(color int64) float64 {
 	r := calcLumColor(float64(color>>16&0xFF) / 255)
 	g := calcLumColor(float64(color>>8&0xFF) / 255)
 	b := calcLumColor(float64(color&0xFF) / 255)
