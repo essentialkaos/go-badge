@@ -148,7 +148,7 @@ func (s *BadgeSuite) TestBlackAndWhite(c *C) {
 func (s *BadgeSuite) TestAux(c *C) {
 	c.Assert(formatColor("000000"), Equals, "000000")
 	c.Assert(formatColor("#000000"), Equals, "000000")
-	c.Assert(formatColor("#000"), Equals, "000000")
+	c.Assert(formatColor("#4c1"), Equals, "44cc11")
 
 	c.Assert(calcLumColor(0.7), Equals, 0.4479884124418833)
 	c.Assert(calcLumColor(0.01), Equals, 0.0007739938080495357)

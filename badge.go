@@ -220,7 +220,9 @@ func formatColor(c string) string {
 
 	// Short hex
 	if len(c) == 3 {
-		c = c + c
+		c = strings.Repeat(string(c[0]), 2) +
+			strings.Repeat(string(c[1]), 2) +
+			strings.Repeat(string(c[2]), 2)
 	}
 
 	return c
