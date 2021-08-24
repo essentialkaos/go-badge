@@ -10,6 +10,7 @@ package badge
 
 import (
 	"io/ioutil"
+	"math"
 	"strconv"
 	"strings"
 
@@ -19,6 +20,9 @@ import (
 )
 
 // ////////////////////////////////////////////////////////////////////////////////// //
+
+// VERSION is current package version
+const VERSION = "1.2.0"
 
 const (
 	COLOR_BLUE        = "#007ec6"
@@ -45,11 +49,17 @@ const (
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
-const _TEMPLATE_PLASTIC = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{WIDTH}" height="18" role="img" aria-label="{LABEL}: {MESSAGE}"><title>{LABEL}: {MESSAGE}</title><linearGradient id="s" x2="0" y2="100%"><stop offset="0"  stop-color="#fff" stop-opacity=".7"/><stop offset=".1" stop-color="#aaa" stop-opacity=".1"/><stop offset=".9" stop-color="#000" stop-opacity=".3"/><stop offset="1"  stop-color="#000" stop-opacity=".5"/></linearGradient><clipPath id="r"><rect width="{WIDTH}" height="18" rx="4" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="{LABEL_WIDTH}" height="18" fill="#555"/><rect x="{LABEL_WIDTH}" width="{MESSAGE_WIDTH}" height="18" fill="{COLOR}"/><rect width="{WIDTH}" height="18" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="{FONT},Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="{FONT_SIZE}"><text aria-hidden="true" x="{LABEL_X}" y="140" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="{LABEL_LENGTH}">{LABEL}</text><text x="{LABEL_X}" y="130" transform="scale(.1)" fill="#fff" textLength="{LABEL_LENGTH}">{LABEL}</text><text aria-hidden="true" x="{MESSAGE_X}" y="140" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text><text x="{MESSAGE_X}" y="130" transform="scale(.1)" fill="#fff" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text></g></svg>`
+const _TEMPLATE_PLASTIC = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{WIDTH}" height="18" role="img" aria-label="{LABEL}: {MESSAGE}"><title>{LABEL}: {MESSAGE}</title><linearGradient id="s" x2="0" y2="100%"><stop offset="0"  stop-color="#fff" stop-opacity=".7"/><stop offset=".1" stop-color="#aaa" stop-opacity=".1"/><stop offset=".9" stop-color="#000" stop-opacity=".3"/><stop offset="1"  stop-color="#000" stop-opacity=".5"/></linearGradient><clipPath id="r"><rect width="{WIDTH}" height="18" rx="4" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="{LABEL_WIDTH}" height="18" fill="#555"/><rect x="{LABEL_WIDTH}" width="{MESSAGE_WIDTH}" height="18" fill="{COLOR}"/><rect width="{WIDTH}" height="18" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="{FONT},Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="{FONT_SIZE}"><text aria-hidden="true" x="{LABEL_X}" y="140" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="{LABEL_LENGTH}">{LABEL}</text><text x="{LABEL_X}" y="130" transform="scale(.1)" fill="#fff" textLength="{LABEL_LENGTH}">{LABEL}</text><text aria-hidden="true" x="{MESSAGE_X}" y="140" fill="{MESSAGE_SHADOW}" fill-opacity=".3" transform="scale(.1)" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text><text x="{MESSAGE_X}" y="130" transform="scale(.1)" fill="{MESSAGE_COLOR}" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text></g></svg>`
 
-const _TEMPLATE_FLAT = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{WIDTH}" height="20" role="img" aria-label="{LABEL}: {MESSAGE}"><title>{LABEL}: {MESSAGE}</title><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="{WIDTH}" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="{LABEL_WIDTH}" height="20" fill="#555"/><rect x="{LABEL_WIDTH}" width="{MESSAGE_WIDTH}" height="20" fill="{COLOR}"/><rect width="{WIDTH}" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="{FONT},Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="{FONT_SIZE}"><text aria-hidden="true" x="{LABEL_X}" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="{LABEL_LENGTH}">{LABEL}</text><text x="{LABEL_X}" y="140" transform="scale(.1)" fill="#fff" textLength="{LABEL_LENGTH}">{LABEL}</text><text aria-hidden="true" x="{MESSAGE_X}" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text><text x="{MESSAGE_X}" y="140" transform="scale(.1)" fill="#fff" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text></g></svg>`
+const _TEMPLATE_FLAT = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{WIDTH}" height="20" role="img" aria-label="{LABEL}: {MESSAGE}"><title>{LABEL}: {MESSAGE}</title><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="{WIDTH}" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="{LABEL_WIDTH}" height="20" fill="#555"/><rect x="{LABEL_WIDTH}" width="{MESSAGE_WIDTH}" height="20" fill="{COLOR}"/><rect width="{WIDTH}" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="{FONT},Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="{FONT_SIZE}"><text aria-hidden="true" x="{LABEL_X}" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="{LABEL_LENGTH}">{LABEL}</text><text x="{LABEL_X}" y="140" transform="scale(.1)" fill="#fff" textLength="{LABEL_LENGTH}">{LABEL}</text><text aria-hidden="true" x="{MESSAGE_X}" y="150" fill="{MESSAGE_SHADOW}" fill-opacity=".3" transform="scale(.1)" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text><text x="{MESSAGE_X}" y="140" transform="scale(.1)" fill="{MESSAGE_COLOR}" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text></g></svg>`
 
-const _TEMPLATE_FLAT_SQUARE = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{WIDTH}" height="20" role="img" aria-label="{LABEL}: {MESSAGE}"><title>{LABEL}: {MESSAGE}</title><g shape-rendering="crispEdges"><rect width="{LABEL_WIDTH}" height="20" fill="#555"/><rect x="{LABEL_WIDTH}" width="{MESSAGE_WIDTH}" height="20" fill="{COLOR}"/></g><g fill="#fff" text-anchor="middle" font-family="{FONT},Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="{FONT_SIZE}"><text x="{LABEL_X}" y="140" transform="scale(.1)" fill="#fff" textLength="{LABEL_LENGTH}">{LABEL}</text><text x="{MESSAGE_X}" y="140" transform="scale(.1)" fill="#fff" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text></g></svg>`
+const _TEMPLATE_FLAT_SQUARE = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{WIDTH}" height="20" role="img" aria-label="{LABEL}: {MESSAGE}"><title>{LABEL}: {MESSAGE}</title><g shape-rendering="crispEdges"><rect width="{LABEL_WIDTH}" height="20" fill="#555"/><rect x="{LABEL_WIDTH}" width="{MESSAGE_WIDTH}" height="20" fill="{COLOR}"/></g><g fill="#fff" text-anchor="middle" font-family="{FONT},Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="{FONT_SIZE}"><text x="{LABEL_X}" y="140" transform="scale(.1)" fill="#fff" textLength="{LABEL_LENGTH}">{LABEL}</text><text x="{MESSAGE_X}" y="140" transform="scale(.1)" fill="{MESSAGE_COLOR}" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text></g></svg>`
+
+const _TEMPLATE_FLAT_SIMPLE = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{WIDTH}" height="20" role="img" aria-label="{MESSAGE}"><title>{MESSAGE}</title><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="r"><rect width="{WIDTH}" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="0" height="20" fill="{COLOR}"/><rect x="0" width="{WIDTH}" height="20" fill="{COLOR}"/><rect width="{WIDTH}" height="20" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="{FONT},Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="{FONT_SIZE}"><text aria-hidden="true" x="{MESSAGE_X}" y="150" fill="{MESSAGE_SHADOW}" fill-opacity=".3" transform="scale(.1)" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text><text x="{MESSAGE_X}" y="140" transform="scale(.1)" fill="{MESSAGE_COLOR}" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text></g></svg>`
+
+const _TEMPLATE_PLASTIC_SIMPLE = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{WIDTH}" height="18" role="img" aria-label="{MESSAGE}"><title>TESTTEST</title><linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset=".1" stop-color="#aaa" stop-opacity=".1"/><stop offset=".9" stop-color="#000" stop-opacity=".3"/><stop offset="1" stop-color="#000" stop-opacity=".5"/></linearGradient><clipPath id="r"><rect width="{WIDTH}" height="18" rx="4" fill="#fff"/></clipPath><g clip-path="url(#r)"><rect width="0" height="18" fill="{COLOR}"/><rect x="0" width="{WIDTH}" height="18" fill="{COLOR}"/><rect width="{WIDTH}" height="18" fill="url(#s)"/></g><g fill="#fff" text-anchor="middle" font-family="{FONT},Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="{FONT_SIZE}"><text aria-hidden="true" x="{MESSAGE_X}" y="140" fill="{MESSAGE_SHADOW}" fill-opacity=".3" transform="scale(.1)" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text><text x="{MESSAGE_X}" y="130" transform="scale(.1)" fill="{MESSAGE_COLOR}" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text></g></svg>`
+
+const _TEMPLATE_FLAT_SQUARE_SIMPLE = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{WIDTH}" height="20" role="img" aria-label="{MESSAGE}"><title>{MESSAGE}</title><g shape-rendering="crispEdges"><rect width="0" height="20" fill="{COLOR}"/><rect x="0" width="{WIDTH}" height="20" fill="{COLOR}"/></g><g fill="#fff" text-anchor="middle" font-family="{FONT},Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="{FONT_SIZE}"><text x="{MESSAGE_X}" y="140" transform="scale(.1)" fill="{MESSAGE_COLOR}" textLength="{MESSAGE_LENGTH}">{MESSAGE}</text></g></svg>`
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
@@ -100,48 +110,158 @@ func NewGenerator(fontFile string, fontSize int) (*Generator, error) {
 
 // GeneratePlastic generates SVG badge in plastic style
 func (g *Generator) GeneratePlastic(label, message, color string) []byte {
+	if label == "" {
+		return g.generateBadgeSimple(_TEMPLATE_PLASTIC_SIMPLE, message, color)
+	}
+
 	return g.generateBadge(_TEMPLATE_PLASTIC, label, message, color)
 }
 
 // GenerateFlat generates SVG badge in flat style
 func (g *Generator) GenerateFlat(label, message, color string) []byte {
+	if label == "" {
+		return g.generateBadgeSimple(_TEMPLATE_FLAT_SIMPLE, message, color)
+	}
+
 	return g.generateBadge(_TEMPLATE_FLAT, label, message, color)
 }
 
 // GenerateFlatSquare generates SVG badge in flat-square style
 func (g *Generator) GenerateFlatSquare(label, message, color string) []byte {
+	if label == "" {
+		return g.generateBadgeSimple(_TEMPLATE_FLAT_SQUARE_SIMPLE, message, color)
+	}
+
 	return g.generateBadge(_TEMPLATE_FLAT_SQUARE, label, message, color)
+}
+
+// GeneratePlasticSimple generates SVG simple badge in plastic style
+func (g *Generator) GeneratePlasticSimple(message, color string) []byte {
+	return g.generateBadgeSimple(_TEMPLATE_PLASTIC_SIMPLE, message, color)
+}
+
+// GenerateFlatSimple generates SVG simple badge in flat style
+func (g *Generator) GenerateFlatSimple(message, color string) []byte {
+	return g.generateBadgeSimple(_TEMPLATE_FLAT_SIMPLE, message, color)
+}
+
+// GenerateFlatSquareSimple generates SVG simple badge in flat-square style
+func (g *Generator) GenerateFlatSquareSimple(message, color string) []byte {
+	return g.generateBadgeSimple(_TEMPLATE_FLAT_SQUARE_SIMPLE, message, color)
 }
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
 // generateBadge generates badge with given template
 func (g *Generator) generateBadge(template, label, message, color string) []byte {
-	if !strings.HasPrefix(color, "#") {
-		color = "#" + color
-	}
+	color = formatColor(color)
 
-	lW := int(g.drawer.MeasureString(label)>>6) + g.Offset
-	mW := int(g.drawer.MeasureString(message)>>6) + g.Offset
+	gF := float64(g.Offset)
+	lW := float64(g.drawer.MeasureString(label)>>6) + gF
+	mW := float64(g.drawer.MeasureString(message)>>6) + gF
 	fW := lW + mW
-	lX := ((lW/2 + 1) * 10) + 5
-	mX := ((lW + (mW / 2) - 1) * 10) + 5
-	lL := int(float64(lW-10) * (10.0 + g.Spacing))
-	mL := int(float64(mW-10) * (10.0 + g.Spacing))
+	lX := (lW/2 + 1) * 10
+	mX := (lW + (mW / 2) - 1) * 10
+	lL := (lW - gF) * (10.0 + g.Spacing - 0.5)
+	mL := (mW - gF) * (10.0 + g.Spacing - 0.5)
 	fS := g.fontSize * 10
+
+	mC, mS := getMessageColors(color)
 
 	badge := strings.ReplaceAll(template, "{LABEL}", label)
 	badge = strings.ReplaceAll(badge, "{MESSAGE}", message)
-	badge = strings.ReplaceAll(badge, "{COLOR}", color)
-	badge = strings.ReplaceAll(badge, "{WIDTH}", strconv.Itoa(fW))
-	badge = strings.ReplaceAll(badge, "{LABEL_WIDTH}", strconv.Itoa(lW))
-	badge = strings.ReplaceAll(badge, "{MESSAGE_WIDTH}", strconv.Itoa(mW))
-	badge = strings.ReplaceAll(badge, "{LABEL_X}", strconv.Itoa(lX))
-	badge = strings.ReplaceAll(badge, "{MESSAGE_X}", strconv.Itoa(mX))
-	badge = strings.ReplaceAll(badge, "{LABEL_LENGTH}", strconv.Itoa(lL))
-	badge = strings.ReplaceAll(badge, "{MESSAGE_LENGTH}", strconv.Itoa(mL))
+	badge = strings.ReplaceAll(badge, "{COLOR}", "#"+color)
+	badge = strings.ReplaceAll(badge, "{WIDTH}", formatFloat(fW))
+	badge = strings.ReplaceAll(badge, "{LABEL_WIDTH}", formatFloat(lW))
+	badge = strings.ReplaceAll(badge, "{MESSAGE_WIDTH}", formatFloat(mW))
+	badge = strings.ReplaceAll(badge, "{LABEL_X}", formatFloat(lX))
+	badge = strings.ReplaceAll(badge, "{MESSAGE_X}", formatFloat(mX))
+	badge = strings.ReplaceAll(badge, "{LABEL_LENGTH}", formatFloat(lL))
+	badge = strings.ReplaceAll(badge, "{MESSAGE_LENGTH}", formatFloat(mL))
+	badge = strings.ReplaceAll(badge, "{MESSAGE_COLOR}", mC)
+	badge = strings.ReplaceAll(badge, "{MESSAGE_SHADOW}", mS)
 	badge = strings.ReplaceAll(badge, "{FONT}", g.fontName)
 	badge = strings.ReplaceAll(badge, "{FONT_SIZE}", strconv.Itoa(fS))
 
 	return []byte(badge)
+}
+
+// generateBadgeSimple generates badge with given template
+func (g *Generator) generateBadgeSimple(template, message, color string) []byte {
+	color = formatColor(color)
+
+	gF := float64(g.Offset)
+	fW := float64(g.drawer.MeasureString(message)>>6) + gF
+	mX := (fW / 2) * 10
+	mL := (fW - gF) * (10.0 + g.Spacing)
+	fS := g.fontSize * 10
+
+	mC, mS := getMessageColors(color)
+
+	badge := strings.ReplaceAll(template, "{MESSAGE}", message)
+	badge = strings.ReplaceAll(badge, "{COLOR}", "#"+color)
+	badge = strings.ReplaceAll(badge, "{WIDTH}", strconv.Itoa(int(fW)))
+	badge = strings.ReplaceAll(badge, "{MESSAGE_X}", strconv.Itoa(int(mX)))
+	badge = strings.ReplaceAll(badge, "{MESSAGE_LENGTH}", strconv.Itoa(int(mL)))
+	badge = strings.ReplaceAll(badge, "{MESSAGE_COLOR}", mC)
+	badge = strings.ReplaceAll(badge, "{MESSAGE_SHADOW}", mS)
+	badge = strings.ReplaceAll(badge, "{FONT}", g.fontName)
+	badge = strings.ReplaceAll(badge, "{FONT_SIZE}", strconv.Itoa(fS))
+
+	return []byte(badge)
+}
+
+// ////////////////////////////////////////////////////////////////////////////////// //
+
+func formatColor(c string) string {
+	if strings.HasPrefix(c, "#") {
+		c = strings.TrimLeft(c, "#")
+	}
+
+	// Short hex
+	if len(c) == 3 {
+		c = c + c
+	}
+
+	return c
+}
+
+// formatFloat formats float values
+func formatFloat(v float64) string {
+	return strconv.FormatFloat(v, 'f', 0, 64)
+}
+
+// getMessageColors returns message text and shadow colors based on color of badge
+func getMessageColors(badgeColor string) (string, string) {
+	c := parseColor(badgeColor)
+
+	if c == 0 || calcLuminance(c) < 0.5 {
+		return "#fff", "#010101"
+	}
+
+	return "#333", "#ccc"
+}
+
+// parseColor parses hex color
+func parseColor(c string) int {
+	i, _ := strconv.ParseInt(c, 16, 64)
+	return int(i)
+}
+
+// calcLuminance calculates relative luminance
+func calcLuminance(color int) float64 {
+	r := calcLumColor(float64(color>>16&0xFF) / 255)
+	g := calcLumColor(float64(color>>8&0xFF) / 255)
+	b := calcLumColor(float64(color&0xFF) / 255)
+
+	return 0.2126*r + 0.7152*g + 0.0722*b
+}
+
+// calcLumColor calculates luminance for one color
+func calcLumColor(c float64) float64 {
+	if c <= 0.03928 {
+		return c / 12.92
+	}
+
+	return math.Pow(((c + 0.055) / 1.055), 2.4)
 }

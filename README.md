@@ -18,7 +18,7 @@
 
 ### Installation
 
-Make sure you have a working Go 1.15+ workspace (_[instructions](https://golang.org/doc/install)_), then:
+Make sure you have a working Go 1.16+ workspace (_[instructions](https://golang.org/doc/install)_), then:
 
 ````bash
 go get -d pkg.re/essentialkaos/go-badge.v1
@@ -57,22 +57,25 @@ func main() {
 
 ### Examples
 
-| Flat | Flat Square | Plastic |
-|------|-------------|---------|
-| ![flat](.github/images/flat_brightgreen.svg) | ![square](.github/images/square_brightgreen.svg) | ![plastic](.github/images/plastic_brightgreen.svg) |
-| ![flat](.github/images/flat_green.svg) | ![square](.github/images/square_green.svg) | ![plastic](.github/images/plastic_green.svg) |
-| ![flat](.github/images/flat_yellowgreen.svg) | ![square](.github/images/square_yellowgreen.svg) | ![plastic](.github/images/plastic_yellowgreen.svg) |
-| ![flat](.github/images/flat_yellow.svg) | ![square](.github/images/square_yellow.svg) | ![plastic](.github/images/plastic_yellow.svg) |
-| ![flat](.github/images/flat_orange.svg) | ![square](.github/images/square_orange.svg) | ![plastic](.github/images/plastic_orange.svg) |
-| ![flat](.github/images/flat_red.svg) | ![square](.github/images/square_red.svg) | ![plastic](.github/images/plastic_red.svg) |
-| ![flat](.github/images/flat_blue.svg) | ![square](.github/images/square_blue.svg) | ![plastic](.github/images/plastic_blue.svg) |
-| ![flat](.github/images/flat_lightgrey.svg) | ![square](.github/images/square_lightgrey.svg) | ![plastic](.github/images/plastic_lightgrey.svg) |
-| ![flat](.github/images/flat_success.svg) | ![square](.github/images/square_success.svg) | ![plastic](.github/images/plastic_success.svg) |
-| ![flat](.github/images/flat_important.svg) | ![square](.github/images/square_important.svg) | ![plastic](.github/images/plastic_important.svg) |
-| ![flat](.github/images/flat_critical.svg) | ![square](.github/images/square_critical.svg) | ![plastic](.github/images/plastic_critical.svg) |
-| ![flat](.github/images/flat_informational.svg) | ![square](.github/images/square_informational.svg) | ![plastic](.github/images/plastic_informational.svg) |
-| ![flat](.github/images/flat_inactive.svg) | ![square](.github/images/square_inactive.svg) | ![plastic](.github/images/plastic_inactive.svg) |
-| ![flat](.github/images/flat_custom.svg) | ![square](.github/images/square_custom.svg) | ![plastic](.github/images/plastic_custom.svg) |
+| Flat | Flat Square | Plastic | Flat (Simple) | Flat Square (Simple) | Plastic (Simple) |
+|------|-------------|---------|---------------|----------------------|------------------|
+| ![flat](.github/images/flat_flat_brightgreen.svg) | ![square](.github/images/square_flat_brightgreen.svg) | ![plastic](.github/images/plastic_flat_brightgreen.svg) | ![flat-simple](.github/images/flat_simple_flat_brightgreen.svg) | ![square-simple](.github/images/square_simple_flat_brightgreen.svg) | ![plastic-simple](.github/images/plastic_simple_flat_brightgreen.svg) |
+| ![flat](.github/images/flat_flat_green.svg) | ![square](.github/images/square_flat_green.svg) | ![plastic](.github/images/plastic_flat_green.svg) | ![flat-simple](.github/images/flat_simple_flat_green.svg) | ![square-simple](.github/images/square_simple_flat_green.svg) | ![plastic-simple](.github/images/plastic_simple_flat_green.svg) |
+| ![flat](.github/images/flat_flat_yellowgreen.svg) | ![square](.github/images/square_flat_yellowgreen.svg) | ![plastic](.github/images/plastic_flat_yellowgreen.svg) | ![flat-simple](.github/images/flat_simple_flat_yellowgreen.svg) | ![square-simple](.github/images/square_simple_flat_yellowgreen.svg) | ![plastic-simple](.github/images/plastic_simple_flat_yellowgreen.svg) |
+| ![flat](.github/images/flat_flat_yellow.svg) | ![square](.github/images/square_flat_yellow.svg) | ![plastic](.github/images/plastic_flat_yellow.svg) | ![flat-simple](.github/images/flat_simple_flat_yellow.svg) | ![square-simple](.github/images/square_simple_flat_yellow.svg) | ![plastic-simple](.github/images/plastic_simple_flat_yellow.svg) |
+| ![flat](.github/images/flat_flat_orange.svg) | ![square](.github/images/square_flat_orange.svg) | ![plastic](.github/images/plastic_flat_orange.svg) | ![flat-simple](.github/images/flat_simple_flat_orange.svg) | ![square-simple](.github/images/square_simple_flat_orange.svg) | ![plastic-simple](.github/images/plastic_simple_flat_orange.svg) |
+| ![flat](.github/images/flat_flat_red.svg) | ![square](.github/images/square_flat_red.svg) | ![plastic](.github/images/plastic_flat_red.svg) | ![flat-simple](.github/images/flat_simple_flat_red.svg) | ![square-simple](.github/images/square_simple_flat_red.svg) | ![plastic-simple](.github/images/plastic_simple_flat_red.svg) |
+| ![flat](.github/images/flat_flat_blue.svg) | ![square](.github/images/square_flat_blue.svg) | ![plastic](.github/images/plastic_flat_blue.svg) | ![flat-simple](.github/images/flat_simple_flat_blue.svg) | ![square-simple](.github/images/square_simple_flat_blue.svg) | ![plastic-simple](.github/images/plastic_simple_flat_blue.svg) |
+| ![flat](.github/images/flat_flat_lightgrey.svg) | ![square](.github/images/square_flat_lightgrey.svg) | ![plastic](.github/images/plastic_flat_lightgrey.svg) | ![flat-simple](.github/images/flat_simple_flat_lightgrey.svg) | ![square-simple](.github/images/square_simple_flat_lightgrey.svg) | ![plastic-simple](.github/images/plastic_simple_flat_lightgrey.svg) |
+| ![flat](.github/images/flat_flat_success.svg) | ![square](.github/images/square_flat_success.svg) | ![plastic](.github/images/plastic_flat_success.svg) | ![flat-simple](.github/images/flat_simple_flat_success.svg) | ![square-simple](.github/images/square_simple_flat_success.svg) | ![plastic-simple](.github/images/plastic_simple_flat_success.svg) |
+| ![flat](.github/images/flat_flat_important.svg) | ![square](.github/images/square_flat_important.svg) | ![plastic](.github/images/plastic_flat_important.svg) | ![flat-simple](.github/images/flat_simple_flat_important.svg) | ![square-simple](.github/images/square_simple_flat_important.svg) | ![plastic-simple](.github/images/plastic_simple_flat_important.svg) |
+| ![flat](.github/images/flat_flat_critical.svg) | ![square](.github/images/square_flat_critical.svg) | ![plastic](.github/images/plastic_flat_critical.svg) | ![flat-simple](.github/images/flat_simple_flat_critical.svg) | ![square-simple](.github/images/square_simple_flat_critical.svg) | ![plastic-simple](.github/images/plastic_simple_flat_critical.svg) |
+| ![flat](.github/images/flat_flat_informational.svg) | ![square](.github/images/square_flat_informational.svg) | ![plastic](.github/images/plastic_flat_informational.svg) | ![flat-simple](.github/images/flat_simple_flat_informational.svg) | ![square-simple](.github/images/square_simple_flat_informational.svg) | ![plastic-simple](.github/images/plastic_simple_flat_informational.svg) |
+| ![flat](.github/images/flat_flat_inactive.svg) | ![square](.github/images/square_flat_inactive.svg) | ![plastic](.github/images/plastic_flat_inactive.svg) | ![flat-simple](.github/images/flat_simple_flat_inactive.svg) | ![square-simple](.github/images/square_simple_flat_inactive.svg) | ![plastic-simple](.github/images/plastic_simple_flat_inactive.svg) |
+| ![flat](.github/images/flat_flat_custom.svg) | ![square](.github/images/square_flat_custom.svg) | ![plastic](.github/images/plastic_flat_custom.svg) | ![flat-simple](.github/images/flat_simple_flat_custom.svg) | ![square-simple](.github/images/square_simple_flat_custom.svg) | ![plastic-simple](.github/images/plastic_simple_flat_custom.svg) |
+| ![flat](.github/images/flat_flat_japanese.svg) | ![square](.github/images/square_flat_japanese.svg) | ![plastic](.github/images/plastic_flat_japanese.svg) | ![flat-simple](.github/images/flat_simple_flat_japanese.svg) | ![square-simple](.github/images/square_simple_flat_japanese.svg) | ![plastic-simple](.github/images/plastic_simple_flat_japanese.svg) |
+
+_All badges are generated with the latest version of the package._
 
 ### Build Status
 
