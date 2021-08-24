@@ -213,6 +213,7 @@ func (g *Generator) generateBadgeSimple(template, message, color string) []byte 
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
+// formatColor formats color
 func formatColor(c string) string {
 	if strings.HasPrefix(c, "#") {
 		c = strings.TrimLeft(c, "#")
