@@ -22,7 +22,7 @@ import (
 // ////////////////////////////////////////////////////////////////////////////////// //
 
 // VERSION is current package version
-const VERSION = "1.2.0"
+const VERSION = "1.2.1"
 
 const (
 	COLOR_BLUE        = "#007ec6"
@@ -238,7 +238,7 @@ func formatFloat(v float64) string {
 func getMessageColors(badgeColor string) (string, string) {
 	c := parseColor(badgeColor)
 
-	if c == 0 || calcLuminance(c) < 0.5 {
+	if c == 0 || calcLuminance(c) < 0.65 {
 		return "#fff", "#010101"
 	}
 
