@@ -9,6 +9,7 @@ package badge
 // ////////////////////////////////////////////////////////////////////////////////// //
 
 import (
+	"fmt"
 	"io/ioutil"
 	"math"
 	"strconv"
@@ -22,7 +23,7 @@ import (
 // ////////////////////////////////////////////////////////////////////////////////// //
 
 // VERSION is current package version
-const VERSION = "1.2.1"
+const VERSION = "1.3.0"
 
 const (
 	COLOR_BLUE        = "#007ec6"
@@ -154,7 +155,7 @@ func (g *Generator) GenerateFlatSquareSimple(message, color string) []byte {
 
 // generateBadge generates badge with given template
 func (g *Generator) generateBadge(template, label, message, color string) []byte {
-	color = formatColor(color)
+	c := parseColor(color)
 
 	gF := float64(g.Offset)
 	lW := float64(g.drawer.MeasureString(label)>>6) + gF
@@ -166,11 +167,11 @@ func (g *Generator) generateBadge(template, label, message, color string) []byte
 	mL := (mW - gF) * (10.0 + g.Spacing - 0.5)
 	fS := g.fontSize * 10
 
-	mC, mS := getMessageColors(color)
+	mC, mS := getMessageColors(c)
 
 	badge := strings.ReplaceAll(template, "{LABEL}", label)
 	badge = strings.ReplaceAll(badge, "{MESSAGE}", message)
-	badge = strings.ReplaceAll(badge, "{COLOR}", "#"+color)
+	badge = strings.ReplaceAll(badge, "{COLOR}", formatColor(c))
 	badge = strings.ReplaceAll(badge, "{WIDTH}", formatFloat(fW))
 	badge = strings.ReplaceAll(badge, "{LABEL_WIDTH}", formatFloat(lW))
 	badge = strings.ReplaceAll(badge, "{MESSAGE_WIDTH}", formatFloat(mW))
@@ -188,7 +189,7 @@ func (g *Generator) generateBadge(template, label, message, color string) []byte
 
 // generateBadgeSimple generates badge with given template
 func (g *Generator) generateBadgeSimple(template, message, color string) []byte {
-	color = formatColor(color)
+	c := parseColor(color)
 
 	gF := float64(g.Offset)
 	fW := float64(g.drawer.MeasureString(message)>>6) + gF
@@ -196,13 +197,13 @@ func (g *Generator) generateBadgeSimple(template, message, color string) []byte 
 	mL := (fW - gF) * (10.0 + g.Spacing)
 	fS := g.fontSize * 10
 
-	mC, mS := getMessageColors(color)
+	mC, mS := getMessageColors(c)
 
 	badge := strings.ReplaceAll(template, "{MESSAGE}", message)
-	badge = strings.ReplaceAll(badge, "{COLOR}", "#"+color)
-	badge = strings.ReplaceAll(badge, "{WIDTH}", strconv.Itoa(int(fW)))
-	badge = strings.ReplaceAll(badge, "{MESSAGE_X}", strconv.Itoa(int(mX)))
-	badge = strings.ReplaceAll(badge, "{MESSAGE_LENGTH}", strconv.Itoa(int(mL)))
+	badge = strings.ReplaceAll(badge, "{COLOR}", formatColor(c))
+	badge = strings.ReplaceAll(badge, "{WIDTH}", formatFloat(fW))
+	badge = strings.ReplaceAll(badge, "{MESSAGE_X}", formatFloat(mX))
+	badge = strings.ReplaceAll(badge, "{MESSAGE_LENGTH}", formatFloat(mL))
 	badge = strings.ReplaceAll(badge, "{MESSAGE_COLOR}", mC)
 	badge = strings.ReplaceAll(badge, "{MESSAGE_SHADOW}", mS)
 	badge = strings.ReplaceAll(badge, "{FONT}", g.fontName)
@@ -213,20 +214,33 @@ func (g *Generator) generateBadgeSimple(template, message, color string) []byte 
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
-// formatColor formats color
-func formatColor(c string) string {
+// parseColor parses hex color
+func parseColor(c string) int64 {
 	if strings.HasPrefix(c, "#") {
 		c = strings.TrimLeft(c, "#")
 	}
 
-	// Short hex
+	// Shorthand hex color
 	if len(c) == 3 {
 		c = strings.Repeat(string(c[0]), 2) +
 			strings.Repeat(string(c[1]), 2) +
 			strings.Repeat(string(c[2]), 2)
 	}
 
-	return c
+	i, _ := strconv.ParseInt(c, 16, 32)
+
+	return i
+}
+
+// formatColor formats color
+func formatColor(c int64) string {
+	k := fmt.Sprintf("%06x", c)
+
+	if k[0] == k[1] && k[2] == k[3] && k[4] == k[5] {
+		k = k[0:1] + k[2:3] + k[4:5]
+	}
+
+	return "#" + k
 }
 
 // formatFloat formats float values
@@ -235,20 +249,12 @@ func formatFloat(v float64) string {
 }
 
 // getMessageColors returns message text and shadow colors based on color of badge
-func getMessageColors(badgeColor string) (string, string) {
-	c := parseColor(badgeColor)
-
+func getMessageColors(c int64) (string, string) {
 	if c == 0 || calcLuminance(c) < 0.65 {
 		return "#fff", "#010101"
 	}
 
 	return "#333", "#ccc"
-}
-
-// parseColor parses hex color
-func parseColor(c string) int64 {
-	i, _ := strconv.ParseInt(c, 16, 32)
-	return i
 }
 
 // calcLuminance calculates relative luminance
