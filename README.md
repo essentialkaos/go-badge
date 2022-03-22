@@ -1,7 +1,7 @@
 <p align="center"><a href="#readme"><img src="https://gh.kaos.st/go-badge.svg"/></a></p>
 
 <p align="center">
-  <a href="https://kaos.sh/g/go-badge.v1"><img src="https://gh.kaos.st/godoc.svg" alt="PkgGoDev" /></a>
+  <a href="https://kaos.sh/g/go-badge"><img src="https://gh.kaos.st/godoc.svg" alt="PkgGoDev" /></a>
   <a href="https://kaos.sh/w/go-badge/ci"><img src="https://kaos.sh/w/go-badge/ci.svg" alt="GitHub Actions CI Status" /></a>
   <a href="https://kaos.sh/r/go-badge"><img src="https://kaos.sh/r/go-badge.svg" alt="GoReportCard" /></a>
   <a href="https://kaos.sh/c/go-badge"><img src="https://kaos.sh/c/go-badge.svg" alt="Coverage Status" /></a>
@@ -18,16 +18,16 @@
 
 ### Installation
 
-Make sure you have a working Go 1.16+ workspace (_[instructions](https://golang.org/doc/install)_), then:
+Make sure you have a working Go 1.17+ workspace (_[instructions](https://golang.org/doc/install)_), then:
 
 ````bash
-go get -d pkg.re/essentialkaos/go-badge.v1
+go get -d github.com/essentialkaos/go-badge
 ````
 
 For update to latest stable release, do:
 
 ```bash
-go get -d -u pkg.re/essentialkaos/go-badge.v1
+go get -d -u github.com/essentialkaos/go-badge
 ```
 
 ### Usage example
@@ -39,7 +39,7 @@ package main
 
 import (
   "fmt"
-  "pkg.re/essentialkaos/go-badge.v1"
+  "github.com/essentialkaos/go-badge"
 )
 
 // ////////////////////////////////////////////////////////////////////////// //
