@@ -22,9 +22,6 @@ import (
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
-// VERSION is current package version
-const VERSION = "1.3.0"
-
 const (
 	COLOR_BLUE        = "#007ec6"
 	COLOR_BRIGHTGREEN = "#4c1"
