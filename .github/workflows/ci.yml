@@ -29,14 +29,14 @@ jobs:
 
     strategy:
       matrix:
-        go: [ '1.18.x', '1.19.x', '1.20.x' ]
+        go: [ '1.20.x', '1.21.x', '1.22.x' ]
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go }}
 
@@ -80,12 +80,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
-          go-version: '1.19.x'
+          go-version: '1.21.x'
 
       - name: Download dependencies
         run: make deps
@@ -94,3 +94,17 @@ jobs:
         uses: essentialkaos/aligo-action@v2
         with:
           files: ./...
+
+  Typos:
+    name: Typos
+    runs-on: ubuntu-latest
+
+    needs: Go
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check spelling
+        continue-on-error: true
+        uses: crate-ci/typos@master

@@ -1,28 +1,20 @@
-<p align="center"><a href="#readme"><img src="https://gh.kaos.st/go-badge.svg"/></a></p>
+<p align="center"><a href="#readme"><img src=".github/images/card.svg"/></a></p>
 
 <p align="center">
-  <a href="https://kaos.sh/g/go-badge"><img src="https://gh.kaos.st/godoc.svg" alt="PkgGoDev" /></a>
+  <a href="https://kaos.sh/g/go-badge"><img src=".github/images/godoc.svg"/></a>
   <a href="https://kaos.sh/w/go-badge/ci"><img src="https://kaos.sh/w/go-badge/ci.svg" alt="GitHub Actions CI Status" /></a>
   <a href="https://kaos.sh/r/go-badge"><img src="https://kaos.sh/r/go-badge.svg" alt="GoReportCard" /></a>
-  <a href="https://kaos.sh/c/go-badge"><img src="https://kaos.sh/c/go-badge.svg" alt="Coverage Status" /></a>
+  <a href="https://kaos.sh/c/go-badge"><img src="https://kaos.sh/c/go-badge.svg" alt="Coverage Status" /></a><br/>
   <a href="https://kaos.sh/b/go-badge"><img src="https://kaos.sh/b/0cbded00-9dfb-458b-bdf8-27b2c70ede9b.svg" alt="Codebeat badge" /></a>
   <a href="https://kaos.sh/w/go-badge/codeql"><img src="https://kaos.sh/w/go-badge/codeql.svg" alt="GitHub Actions CodeQL Status" /></a>
-  <a href="#license"><img src="https://gh.kaos.st/apache2.svg"></a>
+  <a href="#license"><img src=".github/images/license.svg"/></a>
 </p>
 
-<p align="center"><a href="#installation">Installation</a> • <a href="#usage-example">Usage example</a> • <a href="#examples">Examples</a> • <a href="#build-status">Build Status</a> • <a href="#contributing">Contributing</a> • <a href="#thanks">Thanks</a> • <a href="#license">License</a></p>
+<p align="center"><a href="#usage-example">Usage example</a> • <a href="#examples">Examples</a> • <a href="#ci-status">CI Status</a> • <a href="#contributing">Contributing</a> • <a href="#thanks">Thanks</a> • <a href="#license">License</a></p>
 
 <br/>
 
 `badge` is a Go package for generating SVG badges.
-
-### Installation
-
-Make sure you have a working Go 1.18+ workspace (_[instructions](https://golang.org/doc/install)_), then:
-
-````bash
-go get github.com/essentialkaos/go-badge
-````
 
 ### Usage example
 
@@ -71,7 +63,7 @@ func main() {
 
 _All badges are generated with the latest version of the package._
 
-### Build Status
+### CI Status
 
 | Branch | Status |
 |--------|----------|
