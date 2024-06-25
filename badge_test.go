@@ -8,7 +8,9 @@ package badge
 // ////////////////////////////////////////////////////////////////////////////////// //
 
 import (
+	"bytes"
 	"io/ioutil"
+	"os"
 	"testing"
 
 	. "github.com/essentialkaos/check"
@@ -45,6 +47,19 @@ func (s *BadgeSuite) TestErrors(c *C) {
 	_, err = NewGenerator("badge.go", 0)
 
 	c.Assert(err, NotNil)
+}
+
+func (s *BadgeSuite) NewGeneratorFromReader(c *C) {
+	b, err := os.ReadFile("Verdana.ttf")
+	if err != nil {
+		c.Fatal(err.Error())
+	}
+
+	_, err = NewGeneratorFromReader(bytes.NewReader(b), 0)
+
+	if err != nil {
+		c.Fatal(err.Error())
+	}
 }
 
 func (s *BadgeSuite) TestPlastic(c *C) {

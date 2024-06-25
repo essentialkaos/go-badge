@@ -10,8 +10,10 @@ package badge
 
 import (
 	"fmt"
+	"io"
 	"io/ioutil"
 	"math"
+	"os"
 	"strconv"
 	"strings"
 
@@ -73,9 +75,35 @@ type Generator struct {
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
-// NewGenerator creates new badge generator with given font
+// NewGenerator creates new badge generator with given fontFile, which is loaded from the filesystem.
 func NewGenerator(fontFile string, fontSize int) (*Generator, error) {
-	fontData, err := ioutil.ReadFile(fontFile)
+	file, err := os.Open(fontFile)
+
+	if err != nil {
+		return nil, err
+	}
+
+	gen, err := NewGeneratorFromReader(file, fontSize)
+
+	if err != nil {
+		_ = file.Close()
+		return nil, err
+	}
+
+	err = file.Close()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return gen, nil
+}
+
+// ////////////////////////////////////////////////////////////////////////////////// //
+
+// NewGeneratorFromReader creates new badge generator with given font as an io.Reader.
+func NewGeneratorFromReader(w io.Reader, fontSize int) (*Generator, error) {
+	fontData, err := ioutil.ReadAll(w)
 
 	if err != nil {
 		return nil, err
