@@ -3,15 +3,17 @@ package badge
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 //                                                                                    //
-//                         Copyright (c) 2023 ESSENTIAL KAOS                          //
+//                         Copyright (c) 2024 ESSENTIAL KAOS                          //
 //      Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>     //
 //                                                                                    //
 // ////////////////////////////////////////////////////////////////////////////////// //
 
 import (
+	"bytes"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"math"
+	"os"
 	"strconv"
 	"strings"
 
@@ -73,14 +75,31 @@ type Generator struct {
 
 // ////////////////////////////////////////////////////////////////////////////////// //
 
-// NewGenerator creates new badge generator with given font
+// NewGenerator creates new badge generator using given path to font file
 func NewGenerator(fontFile string, fontSize int) (*Generator, error) {
-	fontData, err := ioutil.ReadFile(fontFile)
+	data, err := os.ReadFile(fontFile)
 
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Can't read font data: %w", err)
 	}
 
+	return NewGeneratorFromReader(bytes.NewReader(data), fontSize)
+}
+
+// NewGeneratorFromReader creates a new card generator using a reader that provides font
+// data
+func NewGeneratorFromReader(r io.Reader, fontSize int) (*Generator, error) {
+	fontData, err := io.ReadAll(r)
+
+	if err != nil {
+		return nil, fmt.Errorf("Can't read font data: %w", err)
+	}
+
+	return NewGeneratorFromBytes(fontData, fontSize)
+}
+
+// NewGeneratorFromBytes creates a new card generator using given font data
+func NewGeneratorFromBytes(fontData []byte, fontSize int) (*Generator, error) {
 	fontTTF, err := truetype.Parse(fontData)
 
 	if err != nil {
