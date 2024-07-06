@@ -9,7 +9,6 @@ package badge
 // ////////////////////////////////////////////////////////////////////////////////// //
 
 import (
-	"bytes"
 	"fmt"
 	"io"
 	"math"
@@ -83,7 +82,7 @@ func NewGenerator(fontFile string, fontSize int) (*Generator, error) {
 		return nil, fmt.Errorf("Can't read font data: %w", err)
 	}
 
-	return NewGeneratorFromReader(bytes.NewReader(data), fontSize)
+	return NewGeneratorFromBytes(data, fontSize)
 }
 
 // NewGeneratorFromReader creates a new card generator using a reader that provides font
