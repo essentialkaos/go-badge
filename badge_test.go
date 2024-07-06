@@ -55,6 +55,9 @@ func (s *BadgeSuite) TestConstructors(c *C) {
 
 	_, err = NewGenerator("Verdana.ttf", 11)
 	c.Assert(err, IsNil)
+
+	_, err = NewGeneratorFromReader(fd, 11)
+	c.Assert(err, IsNil)
 }
 
 func (s *BadgeSuite) TestErrors(c *C) {
