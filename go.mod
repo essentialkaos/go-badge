@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/essentialkaos/check v1.4.1
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
-	golang.org/x/image v0.34.0
+	golang.org/x/image v0.35.0
 )
 
 require (
