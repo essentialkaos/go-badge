@@ -2,11 +2,11 @@
 
 <p align="center">
   <a href="https://kaos.sh/g/go-badge"><img src=".github/images/godoc.svg"/></a>
-  <a href="https://kaos.sh/w/go-badge/ci"><img src="https://kaos.sh/w/go-badge/ci.svg" alt="GitHub Actions CI Status" /></a>
-  <a href="https://kaos.sh/r/go-badge"><img src="https://kaos.sh/r/go-badge.svg" alt="GoReportCard" /></a>
-  <a href="https://kaos.sh/c/go-badge"><img src="https://kaos.sh/c/go-badge.svg" alt="Coverage Status" /></a><br/>
-  <a href="https://kaos.sh/y/go-badge"><img src="https://kaos.sh/y/a090e4e0d8e14e58bc9c7a5458c2803e.svg" alt="Codacy badge" /></a>
-  <a href="https://kaos.sh/w/go-badge/codeql"><img src="https://kaos.sh/w/go-badge/codeql.svg" alt="GitHub Actions CodeQL Status" /></a>
+  <a href="https://kaos.sh/w/go-badge/ci"><img src="https://github.com/essentialkaos/go-badge/actions/workflows/ci.yml/badge.svg" alt="GitHub Actions CI Status" /></a>
+  <a href="https://kaos.sh/r/go-badge"><img src="https://goreportcard.com/badge/github.com/essentialkaos/go-badge" alt="GoReportCard" /></a>
+  <a href="https://kaos.sh/c/go-badge"><img src="https://coveralls.io/repos/github/essentialkaos/go-badge/badge.svg" alt="Coverage Status" /></a><br/>
+  <a href="https://kaos.sh/y/go-badge"><img src="https://app.codacy.com/project/badge/Grade/a090e4e0d8e14e58bc9c7a5458c2803e" alt="Codacy badge" /></a>
+  <a href="https://kaos.sh/w/go-badge/codeql"><img src="https://github.com/essentialkaos/go-badge/actions/workflows/codeql.yml/badge.svg" alt="GitHub Actions CodeQL Status" /></a>
   <a href="#license"><img src=".github/images/license.svg"/></a>
 </p>
 
@@ -67,8 +67,8 @@ _All badges are generated with the latest version of the package._
 
 | Branch | Status |
 |--------|----------|
-| `master` | [![CI](https://kaos.sh/w/go-badge/ci.svg?branch=master)](https://kaos.sh/w/go-badge/ci?query=branch:master) |
-| `develop` | [![CI](https://kaos.sh/w/go-badge/ci.svg?branch=develop)](https://kaos.sh/w/go-badge/ci?query=branch:develop) |
+| `master` | [![CI](https://github.com/essentialkaos/go-badge/actions/workflows/ci.yml/badge.svg?branch=master)](https://kaos.sh/w/go-badge/ci?query=branch:master) |
+| `develop` | [![CI](https://github.com/essentialkaos/go-badge/actions/workflows/ci.yml/badge.svg?branch=develop)](https://kaos.sh/w/go-badge/ci?query=branch:develop) |
 
 ### Contributing
 
