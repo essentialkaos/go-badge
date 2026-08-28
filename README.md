@@ -3,7 +3,6 @@
 <p align="center">
   <a href="https://kaos.sh/g/go-badge"><img src=".github/images/godoc.svg"/></a>
   <a href="https://kaos.sh/w/go-badge/ci"><img src="https://github.com/essentialkaos/go-badge/actions/workflows/ci.yml/badge.svg" alt="GitHub Actions CI Status" /></a>
-  <a href="https://kaos.sh/r/go-badge"><img src="https://goreportcard.com/badge/github.com/essentialkaos/go-badge" alt="GoReportCard" /></a>
   <a href="https://kaos.sh/c/go-badge"><img src="https://coveralls.io/repos/github/essentialkaos/go-badge/badge.svg" alt="Coverage Status" /></a><br/>
   <a href="https://kaos.sh/y/go-badge"><img src="https://app.codacy.com/project/badge/Grade/a090e4e0d8e14e58bc9c7a5458c2803e" alt="Codacy badge" /></a>
   <a href="https://kaos.sh/w/go-badge/codeql"><img src="https://github.com/essentialkaos/go-badge/actions/workflows/codeql.yml/badge.svg" alt="GitHub Actions CodeQL Status" /></a>
