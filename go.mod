@@ -1,11 +1,11 @@
 module github.com/essentialkaos/go-badge
 
-go 1.25.0
+go 1.26.0
 
 require (
 	github.com/essentialkaos/check v1.4.1
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
-	golang.org/x/image v0.45.0
+	golang.org/x/image v0.46.0
 )
 
 require (
